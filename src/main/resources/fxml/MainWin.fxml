@@ -26,8 +26,6 @@
                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" onAction="#drawOnAction" text="Draw"/>
                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                        mnemonicParsing="false" onAction="#eraseOnAction" text="Erase"/>
-                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" onAction="#recognizeOnAction" text="Recognize"/>
                             </children>
                         </HBox>

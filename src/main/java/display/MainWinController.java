@@ -46,11 +46,6 @@ public class MainWinController implements IPrjManagable, IWarnable {
     }
 
     @FXML
-    public void eraseOnAction() {
-        canvas.setErase();
-    }
-
-    @FXML
     public void recognizeOnAction() {
         canvas.setRecognize();
     }

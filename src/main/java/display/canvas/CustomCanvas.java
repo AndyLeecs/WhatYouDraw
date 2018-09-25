@@ -2,7 +2,6 @@ package display.canvas;
 
 import display.canvas.state.AbstractState;
 import display.canvas.state.Draw;
-import display.canvas.state.Erase;
 import display.canvas.state.Recognize;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -17,10 +16,6 @@ public class CustomCanvas extends Canvas {
 
     public void setDraw() {
         state = new Draw(state, this);
-    }
-
-    public void setErase() {
-        state = new Erase(state, this);
     }
 
     public void setRecognize() {
