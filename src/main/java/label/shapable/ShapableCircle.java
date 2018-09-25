@@ -15,7 +15,6 @@ public class ShapableCircle extends AbstractShapable {
 
     @Override
     public void draw(GraphicsContext graphicsContext, final double middleX, final double middleY, final double span) {
-//        graphicsContext.fillOval(middleX-span,middleY-span,span,span);
-        graphicsContext.strokeText(LabelConfig.CIRCLE, middleX, middleY);
+        drawLabelName(graphicsContext, LabelConfig.CIRCLE, middleX, middleY);
     }
 }

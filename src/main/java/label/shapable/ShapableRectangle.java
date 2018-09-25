@@ -15,7 +15,6 @@ public class ShapableRectangle extends AbstractShapable {
 
     @Override
     public void draw(GraphicsContext graphicsContext, final double middleX, final double middleY, final double span) {
-//        graphicsContext.fillRect(middleX-span,middleY-span,2*span,2*span);
-        graphicsContext.strokeText(LabelConfig.RECTANGLE, middleX, middleY);
+        drawLabelName(graphicsContext, LabelConfig.RECTANGLE, middleX, middleY);
     }
 }
