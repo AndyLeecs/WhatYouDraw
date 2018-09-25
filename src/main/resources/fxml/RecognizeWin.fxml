@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="pane" prefHeight="125.0" prefWidth="255.0"
+            xmlns="http://javafx.com/javafx/8.0.111">
+    <children>
+        <Slider fx:id="slider" layoutX="8.0" layoutY="31.0" prefHeight="46.0" prefWidth="239.0" showTickLabels="true"
+                showTickMarks="true"/>
+        <Button fx:id="preview" layoutX="30.0" layoutY="77.0" mnemonicParsing="false" onAction="#previewOnAction"
+                text="Preview"/>
+        <Button fx:id="confirm" layoutX="145.0" layoutY="77.0" mnemonicParsing="false" onAction="#confirmOnAction"
+                text="Confirm"/>
+    </children>
+</AnchorPane>
