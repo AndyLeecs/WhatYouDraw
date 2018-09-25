@@ -2,7 +2,6 @@ package identify.algorithm;
 
 import config.IdentifyConfig;
 import geometry.Point;
-import identify.algorithm.EuclideanDistanceComputer;
 import lombok.Getter;
 
 import java.util.ArrayList;

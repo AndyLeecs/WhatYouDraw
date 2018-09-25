@@ -3,8 +3,8 @@ package display.canvas.state;
 import config.ColorConfig;
 import config.LineWidthConfig;
 import data.Sketch;
-import display.alert.ErrorHandler;
 import display.RecognizeWin;
+import display.alert.ErrorHandler;
 import display.canvas.CustomCanvas;
 import exception.SampleSetDataException;
 import identify.ILabelChooser;
@@ -70,7 +70,7 @@ public class Recognize extends AbstractState implements IRecognize {
     }
 
     @Override
-    public void confirm() throws IOException {
+    public void confirm(){
         if (lastSpan == INIT_SPAN) {
             cancel();
         } else {
@@ -86,6 +86,7 @@ public class Recognize extends AbstractState implements IRecognize {
     public void cancel() {
         restore();
     }
+
 
     private void storeForTemp() {
         WritableImage writableImage = canvas.save();
@@ -119,12 +120,12 @@ public class Recognize extends AbstractState implements IRecognize {
         return new Sketch(image);
     }
 
-    private void showLabel(Sketch segment){
+    private void showLabel(Sketch segment) {
         try {
             final ILabelChooser chooser = new LabelChooser();
             final AbstractLabel label = chooser.chooseLabel(segment);
             label.draw(graphicsContext, middleX, middleY, lastSpan);
-        }catch (SampleSetDataException e){
+        } catch (SampleSetDataException e) {
             new ErrorHandler().showErrorDialog(e);
         }
     }

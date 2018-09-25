@@ -1,6 +1,5 @@
 package label.shapable;
 
-import config.LabelConfig;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class AbstractShapable {
@@ -14,7 +13,7 @@ public abstract class AbstractShapable {
 
     protected abstract void draw(GraphicsContext graphicsContext, double middleX, double middleY, double span);
 
-    final void drawLabelName(GraphicsContext graphicsContext, String name, double middleX, double middleY){
+    final void drawLabelName(GraphicsContext graphicsContext, String name, double middleX, double middleY) {
         graphicsContext.strokeText(name, middleX, middleY);
     }
 }

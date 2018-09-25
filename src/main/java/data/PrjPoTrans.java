@@ -16,15 +16,14 @@ import java.io.IOException;
  * persistent object as a file currently
  */
 public class PrjPoTrans {
-    private FileChooser fileChooser;
-    private Window mainStage;
-
     /**
      * allowed file format
      */
     private static final String DESCRIPTION = "Image Files";
     private static final String FORMAT_NAME = "png";
-    private static final String EXTENSION = "*."+FORMAT_NAME;
+    private static final String EXTENSION = "*." + FORMAT_NAME;
+    private FileChooser fileChooser;
+    private Window mainStage;
 
     public PrjPoTrans(final Window mainStage) {
         fileChooser = new FileChooser();

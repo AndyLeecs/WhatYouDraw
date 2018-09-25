@@ -1,7 +1,5 @@
 package config;
 
-import exception.SampleSetDataException;
-
 /**
  * Texts for warning alerts
  */

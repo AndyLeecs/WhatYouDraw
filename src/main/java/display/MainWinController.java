@@ -1,7 +1,7 @@
 package display;
 
-import config.WarningConfig;
 import config.ColorConfig;
+import config.WarningConfig;
 import data.IPrjManagable;
 import data.Prj;
 import data.PrjPoTrans;
@@ -88,7 +88,7 @@ public class MainWinController implements IPrjManagable, IWarnable {
     }
 
     @Override
-    public void onTakenWarningSuggestion(){
+    public void onTakenWarningSuggestion() {
         save();
     }
 

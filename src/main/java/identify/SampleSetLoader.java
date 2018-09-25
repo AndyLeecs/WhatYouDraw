@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class SampleSetLoader {
 
-    List<Gesture> getSampleGesturesFromFile() throws SampleSetDataException{
+    List<Gesture> getSampleGesturesFromFile() throws SampleSetDataException {
         List<Gesture> gestures = new ArrayList<>();
         final URL sampleSetURL = this.getClass().getClassLoader().getResource("sampleSet/");
         if (sampleSetURL != null) {
@@ -38,11 +38,12 @@ public class SampleSetLoader {
         final String sampleSetPath = sampleSetURL.getFile();
         final File wholeSampleSet = new File(sampleSetPath);
         final File[] sampleSetsForEachGesture = wholeSampleSet.listFiles();
+        assert sampleSetsForEachGesture != null;
         assert sampleSetsForEachGesture.length == LabelConfig.LABEL_LIST.size();
         return sampleSetsForEachGesture;
     }
 
-    private void addGestureToList(List<Gesture> gestures, File sampleSetForEachGesture) throws SampleSetDataException{
+    private void addGestureToList(List<Gesture> gestures, File sampleSetForEachGesture) throws SampleSetDataException {
         if (sampleSetForEachGesture.isDirectory()) {
             final File[] gestureSnaps = sampleSetForEachGesture.listFiles();
             final String gestureName = sampleSetForEachGesture.getName();
@@ -56,17 +57,15 @@ public class SampleSetLoader {
         }
     }
 
-    Gesture getGestureFromSingleFile(final File gestureSnap, final String gestureName) throws SampleSetDataException{
+    private Gesture getGestureFromSingleFile(final File gestureSnap, final String gestureName) throws SampleSetDataException {
         try {
             final Image image = SwingFXUtils.toFXImage(ImageIO.read(gestureSnap), null);
             final List<Point> points = new ImageToPoints().getPoints(image);
             return new Gesture(points, gestureName);
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new SampleSetDataException(ExceptionConfig.IDENTIFY);
         }
     }
-
-
 
 
 }

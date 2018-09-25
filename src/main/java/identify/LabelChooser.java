@@ -13,7 +13,7 @@ import label.NotRecognizable;
 import java.util.List;
 
 
-public class LabelChooser implements ILabelChooser{
+public class LabelChooser implements ILabelChooser {
     @Override
     public AbstractLabel chooseLabel(final Sketch segment) throws SampleSetDataException {
         AbstractLabel label;

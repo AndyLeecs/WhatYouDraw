@@ -20,10 +20,8 @@ public class WarningHandler {
         final ButtonType no = new ButtonType(WarningConfig.NO);
         suggestion.getButtonTypes().setAll(yes, no);
         final Optional<ButtonType> result = suggestion.showAndWait();
-        if (result.get() == yes) {
+        if (result.isPresent() && result.get() == yes) {
             confirmationContinue();
-        } else {
-            return;
         }
     }
 
@@ -35,7 +33,7 @@ public class WarningHandler {
     }
 
     private void confirmationContinue() {
-            warnable.onTakenWarningSuggestion();
-        }
+        warnable.onTakenWarningSuggestion();
     }
+}
 

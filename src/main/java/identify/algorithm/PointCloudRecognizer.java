@@ -1,8 +1,6 @@
 package identify.algorithm;
 
 import geometry.Point;
-import identify.algorithm.EuclideanDistanceComputer;
-import identify.algorithm.Gesture;
 
 import java.util.Arrays;
 import java.util.List;

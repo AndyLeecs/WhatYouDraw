@@ -14,7 +14,7 @@ public class PrjVoTrans {
     }
 
     public void prjToVo(final Prj prj) {
-        if(prj != null) {
+        if (prj != null) {
             final Sketch sketch = prj.getSketch();
             final WritableImage image = sketch.getImage();
             prjManagable.getCanvas().load(image);
