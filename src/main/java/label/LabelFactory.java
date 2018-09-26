@@ -5,7 +5,6 @@ import config.LabelConfig;
 public class LabelFactory {
 
     public AbstractLabel createLabel(final String name) {
-        System.out.println("label" + name);
         AbstractLabel label;
 
         //All the labels in @LabelConfig should be listed here

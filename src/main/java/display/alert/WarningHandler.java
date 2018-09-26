@@ -25,7 +25,7 @@ public class WarningHandler {
         }
     }
 
-    private Alert getAlert(String str) {
+    private Alert getAlert(final String str) {
         final Alert suggestion = new Alert(Alert.AlertType.WARNING);
         suggestion.setHeaderText(null);
         suggestion.setContentText(str);

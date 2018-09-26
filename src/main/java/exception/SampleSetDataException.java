@@ -1,7 +1,7 @@
 package exception;
 
 public class SampleSetDataException extends Exception {
-    public SampleSetDataException(String msg) {
+    public SampleSetDataException(final String msg) {
         super(msg);
     }
 }

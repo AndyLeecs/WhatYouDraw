@@ -27,7 +27,7 @@ public class RecognizeWin extends Stage {
         });
     }
 
-    private void setStageStyle(AnchorPane pane) {
+    private void setStageStyle(final AnchorPane pane) {
         final Scene scene = new Scene(pane);
         this.setTitle("");
         this.setScene(scene);

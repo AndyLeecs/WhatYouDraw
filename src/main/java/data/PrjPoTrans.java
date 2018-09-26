@@ -35,7 +35,7 @@ public class PrjPoTrans {
     public void prjToPo(final Prj prj) throws ProjectDataException {
         try {
             final Sketch sketch = prj.getSketch();
-            WritableImage image = sketch.getImage();
+            final WritableImage image = sketch.getImage();
             final File file = fileChooser.showSaveDialog(mainStage);
             if (file != null) {
                 ImageIO.write(SwingFXUtils.fromFXImage(image, null), FORMAT_NAME, file);

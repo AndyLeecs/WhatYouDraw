@@ -34,7 +34,7 @@ public class SampleSetLoader {
         return gestures;
     }
 
-    private File[] getSampleSetsForEachGesture(URL sampleSetURL) {
+    private File[] getSampleSetsForEachGesture(final URL sampleSetURL) {
         final String sampleSetPath = sampleSetURL.getFile();
         final File wholeSampleSet = new File(sampleSetPath);
         final File[] sampleSetsForEachGesture = wholeSampleSet.listFiles();
@@ -43,11 +43,11 @@ public class SampleSetLoader {
         return sampleSetsForEachGesture;
     }
 
-    private void addGestureToList(List<Gesture> gestures, File sampleSetForEachGesture) throws SampleSetDataException {
+    private void addGestureToList(List<Gesture> gestures, final File sampleSetForEachGesture) throws SampleSetDataException {
         if (sampleSetForEachGesture.isDirectory()) {
             final File[] gestureSnaps = sampleSetForEachGesture.listFiles();
             final String gestureName = sampleSetForEachGesture.getName();
-            assert (LabelConfig.LABEL_LIST.contains(gestureName));
+            assert LabelConfig.LABEL_LIST.contains(gestureName);
             if (gestureSnaps != null) {
                 for (final File gestureSnap : gestureSnaps) {
                     final Gesture gesture = getGestureFromSingleFile(gestureSnap, gestureName);

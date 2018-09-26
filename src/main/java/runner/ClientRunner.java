@@ -8,7 +8,7 @@ import javafx.embed.swing.JFXPanel;
 import java.io.IOException;
 import java.util.Locale;
 
-public class ClientRunner {
+public final class ClientRunner {
     private ClientRunner() {
         new JFXPanel();
         initGUI();

@@ -1,19 +1,30 @@
 package label.shapable;
 
+import geometry.TargetFrame;
+import geometry.TargetPoint;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class AbstractShapable {
 
-    public final void setColorAndDraw(GraphicsContext graphicsContext, double middleX, double middleY, double span) {
+    protected String labelMarker;
+
+    public final void setColorAndDraw(final GraphicsContext graphicsContext, final TargetFrame targetFrame) {
         setColor(graphicsContext);
-        draw(graphicsContext, middleX, middleY, span);
+        setLabel();
+        draw(graphicsContext, targetFrame);
     }
 
     protected abstract void setColor(GraphicsContext graphicsContext);
 
-    protected abstract void draw(GraphicsContext graphicsContext, double middleX, double middleY, double span);
+    protected abstract void setLabel();
 
-    final void drawLabelName(GraphicsContext graphicsContext, String name, double middleX, double middleY) {
+    protected final void draw(final GraphicsContext graphicsContext, final TargetFrame targetFrame) {
+        drawLabelName(graphicsContext, labelMarker, targetFrame.getTargetPoint());
+    }
+
+    final void drawLabelName(final GraphicsContext graphicsContext, final String name, final TargetPoint targetPoint) {
+        final double middleX = targetPoint.getX();
+        final double middleY = targetPoint.getY();
         graphicsContext.strokeText(name, middleX, middleY);
     }
 }

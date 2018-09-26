@@ -3,17 +3,12 @@ package geometry;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Target point in @TargetFrame
+ */
 @Getter
 @AllArgsConstructor
-public class Point {
+public class TargetPoint {
     private double x;
     private double y;
-    private int strokeID;
-
-    public Point(final double x, final double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-
 }

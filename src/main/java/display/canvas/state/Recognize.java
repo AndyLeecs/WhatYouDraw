@@ -7,6 +7,7 @@ import display.RecognizeWin;
 import display.alert.ErrorHandler;
 import display.canvas.CustomCanvas;
 import exception.SampleSetDataException;
+import geometry.TargetFrame;
 import identify.ILabelChooser;
 import identify.LabelChooser;
 import javafx.application.Platform;
@@ -24,13 +25,9 @@ import static java.lang.Math.min;
 
 public class Recognize extends AbstractState implements IRecognize {
 
-    private final double INIT_SPAN = -1;
-    private double middleX = -1;
-    private double middleY = -1;
-    private double lastSpan = INIT_SPAN;
-
+    private TargetFrame targetFrame; //user chosen target frame
     private RecognizeWin recognizeWin;
-    private Sketch sketch;
+    private Sketch sketch; //whole sketch
 
     public Recognize(final AbstractState formerState, final CustomCanvas canvas) {
         super(formerState, canvas);
@@ -41,8 +38,11 @@ public class Recognize extends AbstractState implements IRecognize {
         final EventHandler<MouseEvent> target = event -> {
             storeForTemp();
 
-            middleX = event.getX();
-            middleY = event.getY();
+            double middleX = event.getX();
+            double middleY = event.getY();
+
+            assert middleX >= 0 && middleY >= 0;
+            targetFrame = new TargetFrame(middleX, middleY);
 
             double maxSpan = getTargetMaxSpan();
 
@@ -65,20 +65,20 @@ public class Recognize extends AbstractState implements IRecognize {
     public void preview(final double span) {
         restore();
         setStroke(ColorConfig.RECOGNIZE_COLOR, LineWidthConfig.RECOGNIZE_WIDTH);
-        drawFrame(span);
-        lastSpan = span;
+        targetFrame.setSpan(span);
+        targetFrame.draw(graphicsContext);
     }
 
     @Override
     public void confirm(){
-        if (lastSpan == INIT_SPAN) {
-            cancel();
-        } else {
+        if (targetFrame.isValid()) {
             recognizeWin.close();
             storeForTemp();
             final Sketch segment = getSegment();
             showLabel(segment);
-            reset();
+            resetSpan();
+        } else {
+            cancel();
         }
     }
 
@@ -87,20 +87,13 @@ public class Recognize extends AbstractState implements IRecognize {
         restore();
     }
 
-
-    private void storeForTemp() {
-        WritableImage writableImage = canvas.save();
-        sketch = new Sketch(writableImage);
-    }
-
+    /**
+     * get the maximum allowed span on this canvas with the selected middle point
+     */
     private double getTargetMaxSpan() {
-        double res = 0;
-        if (middleX >= 0 && middleY >= 0) {
-            final double targetMaxWidth = getTargetMaxInOneDimension(canvas.getWidth(), middleX);
-            final double targetMaxLength = getTargetMaxInOneDimension(canvas.getHeight(), middleY);
-            res = min(targetMaxLength, targetMaxWidth);
-        }
-        return res;
+        final double targetMaxWidth = getTargetMaxInOneDimension(canvas.getWidth(), targetFrame.getX());
+        final double targetMaxLength = getTargetMaxInOneDimension(canvas.getHeight(), targetFrame.getY());
+        return min(targetMaxLength, targetMaxWidth);
     }
 
     private double getTargetMaxInOneDimension(final double totalLength, final double targetPosition) {
@@ -108,39 +101,45 @@ public class Recognize extends AbstractState implements IRecognize {
         return min(targetPosition, margin);
     }
 
+    /**
+     * get the selected segment of the sketch
+     */
     private Sketch getSegment() {
-        WritableImage writableImage = sketch.getImage();
+        final WritableImage writableImage = sketch.getImage();
         final BufferedImage swingImage = SwingFXUtils.fromFXImage(writableImage, null);
         final Image fxImage = SwingFXUtils.toFXImage(swingImage, null);
-        final WritableImage image = new WritableImage(fxImage.getPixelReader(),
-                (int) (middleX - lastSpan) + 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH,
-                (int) (middleY - lastSpan) + 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH,
-                (int) (2 * lastSpan) - 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH,
-                (int) (2 * lastSpan) - 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH);
+        final WritableImage image = targetFrame.clip(fxImage);
         return new Sketch(image);
     }
 
-    private void showLabel(Sketch segment) {
+    private void showLabel(final Sketch segment) {
         try {
             final ILabelChooser chooser = new LabelChooser();
             final AbstractLabel label = chooser.chooseLabel(segment);
-            label.draw(graphicsContext, middleX, middleY, lastSpan);
+            label.draw(graphicsContext, targetFrame);
         } catch (SampleSetDataException e) {
             new ErrorHandler().showErrorDialog(e);
         }
     }
 
-    private void reset() {
+    private void resetSpan() {
         storeForTemp();
-        lastSpan = INIT_SPAN;
+        targetFrame.resetSpan();
     }
 
-    private void drawFrame(final double span) {
-        graphicsContext.strokeRect(middleX - span, middleY - span, 2 * span, 2 * span);
+    /**
+     * temporarily store the sketch
+     */
+    private void storeForTemp() {
+        final WritableImage writableImage = canvas.save();
+        sketch = new Sketch(writableImage);
     }
 
+    /**
+     * restore the previously saved sketch
+     */
     private void restore() {
-        WritableImage writableImage = sketch.getImage();
+        final WritableImage writableImage = sketch.getImage();
         canvas.load(writableImage);
     }
 }

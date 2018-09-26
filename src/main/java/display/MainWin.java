@@ -32,7 +32,7 @@ public class MainWin extends Stage {
         });
     }
 
-    private void setStageStyle(AnchorPane pane) {
+    private void setStageStyle(final AnchorPane pane) {
         final Scene scene = new Scene(pane);
         this.setTitle(TitleConfig.TITLE);
         this.setScene(scene);

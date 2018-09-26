@@ -26,7 +26,6 @@ public class RecognizeWinController {
 
     @FXML
     public void initialize() {
-        System.out.println(maxSpan);
         slider.setMin(0);
         slider.setMax(maxSpan);
     }

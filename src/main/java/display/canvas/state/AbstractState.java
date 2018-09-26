@@ -32,7 +32,7 @@ public abstract class AbstractState {
             return;
         }
         final List<EventHandler<MouseEvent>> formerEventHandlers = formerState.getEventHandlers();
-        for (EventHandler<MouseEvent> eventHandler : formerEventHandlers) {
+        for (final EventHandler<MouseEvent> eventHandler : formerEventHandlers) {
             canvas.removeEventFilter(MouseEvent.MOUSE_DRAGGED, eventHandler);
             canvas.removeEventFilter(MouseEvent.MOUSE_PRESSED, eventHandler);
             canvas.removeEventFilter(MouseEvent.MOUSE_RELEASED, eventHandler);

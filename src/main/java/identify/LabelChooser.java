@@ -17,7 +17,7 @@ public class LabelChooser implements ILabelChooser {
     @Override
     public AbstractLabel chooseLabel(final Sketch segment) throws SampleSetDataException {
         AbstractLabel label;
-        WritableImage image = segment.getImage();
+        final WritableImage image = segment.getImage();
         List<Point> points = new ImageToPoints().getPoints(image);
         if (points.isEmpty()) {
             label = new NotRecognizable();

@@ -72,7 +72,7 @@ public class MainWinController implements IPrjManagable, IWarnable {
         }
     }
 
-    private void prjToVo(Prj prj) {
+    private void prjToVo(final Prj prj) {
         final PrjVoTrans prjVoTrans = new PrjVoTrans(this);
         prjVoTrans.prjToVo(prj);
     }
@@ -101,7 +101,7 @@ public class MainWinController implements IPrjManagable, IWarnable {
         }
     }
 
-    private void prjToPo(Prj prj) throws ProjectDataException {
+    private void prjToPo(final Prj prj) throws ProjectDataException {
         final PrjPoTrans prjPoTrans = new PrjPoTrans(getWindow());
         prjPoTrans.prjToPo(prj);
     }
