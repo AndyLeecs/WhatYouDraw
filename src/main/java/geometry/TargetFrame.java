@@ -58,9 +58,9 @@ public class TargetFrame implements IDrawable, IImageClipable {
         final double middleX = targetPoint.getX();
         final double middleY = targetPoint.getY();
         return new WritableImage(image.getPixelReader(),
-                (int) (middleX - span) + 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH,
-                (int) (middleY - span) + 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH,
-                (int) (2 * span) - 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH,
-                (int) (2 * span) - 2 * (int) LineWidthConfig.RECOGNIZE_WIDTH);
+                (int) (middleX - span),
+                (int) (middleY - span),
+                (int) (2 * span),
+                (int) (2 * span));
     }
 }

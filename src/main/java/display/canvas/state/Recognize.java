@@ -73,7 +73,7 @@ public class Recognize extends AbstractState implements IRecognize {
     public void confirm(){
         if (targetFrame.isValid()) {
             recognizeWin.close();
-            storeForTemp();
+            restore();
             final Sketch segment = getSegment();
             showLabel(segment);
             resetSpan();
