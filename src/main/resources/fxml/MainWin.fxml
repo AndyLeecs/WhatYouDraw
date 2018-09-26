@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" maxWidth="1180.0" minHeight="800.0" minWidth="1180.0"
-            prefWidth="1180.0" xmlns="http://javafx.com/javafx/8.0.111"
+            prefWidth="1180.0" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="display.MainWinController">
     <children>
         <VBox>
@@ -25,6 +25,12 @@
                             <children>
                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" onAction="#drawOnAction" text="Draw"/>
+                                <Button fx:id="undo" maxHeight="1.7976931348623157E308"
+                                        maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                        onAction="#undoOnAction" text="Undo"/>
+                                <Button fx:id="redo" maxHeight="1.7976931348623157E308"
+                                        maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                        onAction="#redoOnAction" text="Redo"/>
                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" onAction="#recognizeOnAction" text="Recognize"/>
                             </children>

@@ -19,6 +19,7 @@ public class LabelFactory {
                 label = new Triangle();
                 break;
             default:
+                assert false : "non recognizable";
                 label = new NotRecognizable();
         }
         return label;

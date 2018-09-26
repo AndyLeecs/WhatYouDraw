@@ -21,6 +21,7 @@ public abstract class AbstractState {
      * On construction of a new state, remove all the eventHandlers of the canvas, and add new ones
      */
     public AbstractState(final AbstractState formerState, final CustomCanvas canvas) {
+        canvas.clearMemory();
         this.canvas = canvas;
         this.graphicsContext = canvas.getGraphicsContext2D();
         removeFormerEventHandlers(formerState);
