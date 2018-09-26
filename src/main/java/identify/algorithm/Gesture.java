@@ -36,7 +36,11 @@ public class Gesture {
      */
     private List<Point> scale(final List<Point> points) {
 
-        double minx = Double.MAX_VALUE, miny = Double.MAX_VALUE, maxx = Double.MIN_VALUE, maxy = Double.MIN_VALUE;
+        double minx = Double.MAX_VALUE;
+        double miny = Double.MAX_VALUE;
+        double maxx = Double.MIN_VALUE;
+        double maxy = Double.MIN_VALUE;
+
         for(Point point : points){
             minx = min(minx, point.getX());
             miny = min(miny, point.getY());
@@ -68,7 +72,8 @@ public class Gesture {
      * Computes the centroid for an array of points
      */
     private Point centroid(final List<Point> points) {
-        double cx = 0, cy = 0;
+        double cx = 0;
+        double cy = 0;
         for (Point point : points) {
             cx += point.getX();
             cy += point.getY();
@@ -81,7 +86,7 @@ public class Gesture {
      */
     private List<Point> resample(final List<Point> points, final int n) {
         final List<Point> newPoints = new ArrayList<>();
-        assert points.size() > 0;
+        assert !points.isEmpty();
         newPoints.add(new Point(points.get(0).getX(), points.get(0).getY(), points.get(0).getStrokeID()));
         int numPoints = 1;
 

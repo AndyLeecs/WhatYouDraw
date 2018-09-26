@@ -29,7 +29,7 @@ public class WarningHandler {
                 confirmationContinue();
             }
 
-        return !(result.get() == cancel);
+        return result.get() != cancel;
     }
 
     private Alert getAlert(final String str) {

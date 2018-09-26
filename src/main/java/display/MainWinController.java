@@ -35,9 +35,9 @@ public class MainWinController implements IPrjManagable, IWarnable, INotifiable 
     @FXML
     private Button redo;
     @FXML
-    private Button newfile;
+    private Button newFile;
 
-    private boolean modified;
+    private boolean isModified;
 
     @Override
     public CustomCanvas getCanvas() {
@@ -78,7 +78,7 @@ public class MainWinController implements IPrjManagable, IWarnable, INotifiable 
      * if not modified before, the warning will not be shown
      */
     private boolean warnOnNew() {
-        return !modified || new WarningHandler(this).showConfirmationDialog(WarningConfig.SAVE_FIRST);
+        return !isModified || new WarningHandler(this).showConfirmationDialog(WarningConfig.SAVE_FIRST);
     }
 
     @FXML
@@ -174,16 +174,16 @@ public class MainWinController implements IPrjManagable, IWarnable, INotifiable 
         undo.setDisable(true);
         redo.setDisable(true);
 
-        modified = false;
-        newfile.setDisable(true);
+        isModified = false;
+        newFile.setDisable(true);
     }
 
     @Override
     public void enableUndo() {
         undo.setDisable(false);
 
-        modified = true;
-        newfile.setDisable(false);
+        isModified = true;
+        newFile.setDisable(false);
     }
 
 }

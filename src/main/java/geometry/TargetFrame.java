@@ -1,6 +1,5 @@
 package geometry;
 
-import config.LineWidthConfig;
 import display.IDrawable;
 import display.IImageClipable;
 import javafx.scene.canvas.GraphicsContext;

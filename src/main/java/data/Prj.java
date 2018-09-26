@@ -11,5 +11,6 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 public class Prj implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Sketch sketch;
 }
