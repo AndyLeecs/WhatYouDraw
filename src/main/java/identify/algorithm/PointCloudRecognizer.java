@@ -55,7 +55,8 @@ public class PointCloudRecognizer {
     /// <param name="startIndex"></param>
     /// <returns></returns>
     private static double cloudDistance(final List<Point> points1, final List<Point> points2, final int startIndex) {
-        final int n = points1.size();       // the two clouds should have the same number of points by now
+        assert points1.size() == points2.size();  // the two clouds should have the same number of points by now
+        final int n = points1.size();
         boolean[] matched = new boolean[n]; // matched[i] signals whether point i from the 2nd cloud has been already matched
         Arrays.fill(matched, false);
 

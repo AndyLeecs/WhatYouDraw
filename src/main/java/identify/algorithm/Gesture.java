@@ -21,15 +21,12 @@ public class Gesture {
     /// </summary>
     /// <param name="points"></param>
     public Gesture(final List<Point> points, final String gestureName) {
+        this(points);
         this.name = gestureName;
-
-        // normalizes the array of points with respect to scale, origin, and number of points
-        this.points = scale(points);
-        this.points = translateTo(this.points, centroid(this.points));
-        this.points = resample(this.points, IdentifyConfig.SAMPLING_RESOLUTION);
     }
 
     public Gesture(final List<Point> points) {
+        // normalizes the array of points with respect to scale, origin, and number of points
         this.points = scale(points);
         this.points = translateTo(this.points, centroid(this.points));
         this.points = resample(this.points, IdentifyConfig.SAMPLING_RESOLUTION);
@@ -95,6 +92,7 @@ public class Gesture {
     /// <returns></returns>
     private List<Point> resample(final List<Point> points, final int n) {
         final List<Point> newPoints = new ArrayList<>();
+        assert points.size() > 0;
         newPoints.add(new Point(points.get(0).getX(), points.get(0).getY(), points.get(0).getStrokeID()));
         int numPoints = 1;
 
