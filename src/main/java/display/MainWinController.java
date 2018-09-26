@@ -60,7 +60,7 @@ public class MainWinController implements IPrjManagable, IWarnable, INotifiable 
     @FXML
     public void recognizeOnAction() {
         canvas.setRecognize();
-        onNewFileFired();
+        disableUndoAndRedo();
     }
 
     @FXML
@@ -74,7 +74,7 @@ public class MainWinController implements IPrjManagable, IWarnable, INotifiable 
     }
 
     /**
-     * @return true for not modified or not cancelled
+     * @return true for not modified or warning window not cancelled
      * if not modified before, the warning will not be shown
      */
     private boolean warnOnNew() {
@@ -170,9 +170,12 @@ public class MainWinController implements IPrjManagable, IWarnable, INotifiable 
         return root.getScene().getWindow();
     }
 
-    private void onNewFileFired() {
+    private void disableUndoAndRedo() {
         undo.setDisable(true);
         redo.setDisable(true);
+    }
+    private void onNewFileFired() {
+        disableUndoAndRedo();
 
         isModified = false;
         newFile.setDisable(true);
