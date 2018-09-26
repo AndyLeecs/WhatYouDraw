@@ -11,7 +11,6 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @Getter
-
 public class Gesture {
 
     public List<Point> points;            // gesture points (normalized)
@@ -44,26 +43,18 @@ public class Gesture {
     private List<Point> scale(final List<Point> points) {
 
         double minx = Double.MAX_VALUE, miny = Double.MAX_VALUE, maxx = Double.MIN_VALUE, maxy = Double.MIN_VALUE;
-        for (int i = 0; i < points.size(); i++) {
-            if (minx > points.get(i).getX()) {
-                minx = points.get(i).getX();
-            }
-            if (miny > points.get(i).getY()) {
-                miny = points.get(i).getY();
-            }
-            if (maxx < points.get(i).getX()) {
-                maxx = points.get(i).getX();
-            }
-            if (maxy < points.get(i).getY()) {
-                maxy = points.get(i).getY();
-            }
+        for(Point point : points){
+            minx = min(minx, point.getX());
+            miny = min(miny, point.getY());
+            maxx = max(maxx, point.getX());
+            maxy = max(maxy, point.getY());
         }
 
         final List<Point> newPoints = new ArrayList<>(points.size());
         final double scale = max(maxx - minx, maxy - miny);
-        for (int i = 0; i < points.size(); i++) {
-            newPoints.add(new Point((points.get(i).getX() - minx) / scale, (points.get(i).getY() - miny) / scale, points.get(i).getStrokeID()));
-
+        for(Point point : points){
+            newPoints.add(new Point(
+                    (point.getX() - minx) / scale, (point.getY() - miny) / scale, point.getStrokeID()));
         }
         return newPoints;
     }
@@ -76,9 +67,8 @@ public class Gesture {
     /// <returns></returns>
     private List<Point> translateTo(final List<Point> points, final Point p) {
         final List<Point> newPoints = new ArrayList<>();
-        for (int i = 0; i < points.size(); i++) {
-            newPoints.add(new Point(points.get(i).getX() - p.getX(), points.get(i).getY() - p.getY(), points.get(i).getStrokeID()));
-
+        for(Point point : points){
+            newPoints.add(new Point(point.getX() - p.getX(), point.getY() - p.getY(), point.getStrokeID()));
         }
         return newPoints;
     }
