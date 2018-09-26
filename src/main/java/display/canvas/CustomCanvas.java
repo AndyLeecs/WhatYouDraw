@@ -20,7 +20,7 @@ public class CustomCanvas extends Canvas {
     private Memory memory = new Memory();
 
     @Setter
-    private IUndoNotifiable undoNotifiable;
+    private INotifiable notifiable;
 
     public void setDraw() {
         state = new Draw(state, this);
@@ -59,7 +59,7 @@ public class CustomCanvas extends Canvas {
     }
 
     public void notifyUndoable() {
-        undoNotifiable.enableUndo();
+        notifiable.enableUndo();
     }
 
     public void undo() {

@@ -13,7 +13,8 @@
                     <children>
                         <HBox prefHeight="41.0" prefWidth="600.0">
                             <children>
-                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                <Button fx:id="newfile" maxHeight="1.7976931348623157E308"
+                                        maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" onAction="#newOnAction" text="New"/>
                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" onAction="#openOnAction" text="Open"/>
