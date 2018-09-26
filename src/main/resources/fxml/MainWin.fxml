@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" maxWidth="1180.0" minHeight="800.0" minWidth="1180.0"
-            prefWidth="1180.0" xmlns="http://javafx.com/javafx/8.0.121"
+            prefWidth="1180.0" xmlns="http://javafx.com/javafx/8.0.111"
             fx:controller="display.MainWinController">
     <children>
         <VBox>
