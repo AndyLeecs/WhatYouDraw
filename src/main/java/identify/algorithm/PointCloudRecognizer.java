@@ -6,14 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PointCloudRecognizer {
-    /// <summary>
-    /// Main function of the $P recognizer.
-    /// Classifies a candidate gesture against a set of training samples.
-    /// Returns the class of the closest neighbor in the training set.
-    /// </summary>
-    /// <param name="candidate"></param>
-    /// <param name="trainingSet"></param>
-    /// <returns></returns>
+
+    /**
+     *  Main function of the $P recognizer.
+     *  Classifies a candidate gesture against a set of training samples.
+     *  Returns the class of the closest neighbor in the training set.
+     */
     public static String classify(final Gesture candidate, final List<Gesture> trainingSet) {
         double minDistance = Double.MAX_VALUE;
         String gestureClass = "";
@@ -27,12 +25,9 @@ public class PointCloudRecognizer {
         return gestureClass;
     }
 
-    /// <summary>
-    /// Implements greedy search for a minimum-distance matching between two point clouds
-    /// </summary>
-    /// <param name="points1"></param>
-    /// <param name="points2"></param>
-    /// <returns></returns>
+    /**
+     * Implements greedy search for a minimum-distance matching between two point clouds
+     */
     private static double greedyCloudMatch(final List<Point> points1, final List<Point> points2) {
         int n = points1.size(); // the two clouds should have the same number of points by now
         double eps = 0.5f;       // controls the number of greedy search trials (eps is in [0..1])
@@ -46,14 +41,10 @@ public class PointCloudRecognizer {
         return minDistance;
     }
 
-    /// <summary>
-    /// Computes the distance between two point clouds by performing a minimum-distance greedy matching
-    /// starting with point startIndex
-    /// </summary>
-    /// <param name="points1"></param>
-    /// <param name="points2"></param>
-    /// <param name="startIndex"></param>
-    /// <returns></returns>
+    /**
+     * Computes the distance between two point clouds by performing a minimum-distance greedy matching
+     * starting with point startIndex
+     */
     private static double cloudDistance(final List<Point> points1, final List<Point> points2, final int startIndex) {
         assert points1.size() == points2.size();  // the two clouds should have the same number of points by now
         final int n = points1.size();

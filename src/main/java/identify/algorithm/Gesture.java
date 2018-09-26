@@ -16,10 +16,9 @@ public class Gesture {
     public List<Point> points;            // gesture points (normalized)
     public String name = "";                 // gesture class
 
-    /// <summary>
-    /// Constructs a gesture from an array of points
-    /// </summary>
-    /// <param name="points"></param>
+    /**
+     * Constructs a gesture from an array of points
+     */
     public Gesture(final List<Point> points, final String gestureName) {
         this(points);
         this.name = gestureName;
@@ -32,11 +31,9 @@ public class Gesture {
         this.points = resample(this.points, IdentifyConfig.SAMPLING_RESOLUTION);
     }
 
-    /// <summary>
-    /// Performs scale normalization with shape preservation into [0..1]x[0..1]
-    /// </summary>
-    /// <param name="points"></param>
-    /// <returns></returns>
+    /**
+     * Performs scale normalization with shape preservation into [0..1]x[0..1]
+     */
     private List<Point> scale(final List<Point> points) {
 
         double minx = Double.MAX_VALUE, miny = Double.MAX_VALUE, maxx = Double.MIN_VALUE, maxy = Double.MIN_VALUE;
@@ -56,12 +53,9 @@ public class Gesture {
         return newPoints;
     }
 
-    /// <summary>
-    /// Translates the array of points by p
-    /// </summary>
-    /// <param name="points"></param>
-    /// <param name="p"></param>
-    /// <returns></returns>
+    /**
+     * Translates the array of points by p
+     */
     private List<Point> translateTo(final List<Point> points, final Point p) {
         final List<Point> newPoints = new ArrayList<>();
         for(Point point : points){
@@ -70,11 +64,9 @@ public class Gesture {
         return newPoints;
     }
 
-    /// <summary>
-    /// Computes the centroid for an array of points
-    /// </summary>
-    /// <param name="points"></param>
-    /// <returns></returns>
+    /**
+     * Computes the centroid for an array of points
+     */
     private Point centroid(final List<Point> points) {
         double cx = 0, cy = 0;
         for (Point point : points) {
@@ -84,12 +76,9 @@ public class Gesture {
         return new Point(cx / points.size(), cy / points.size(), 0);
     }
 
-    /// <summary>
-    /// Resamples the array of points into n equally-distanced points
-    /// </summary>
-    /// <param name="points"></param>
-    /// <param name="n"></param>
-    /// <returns></returns>
+    /**
+     * Resamples the array of points into n equally-distanced points
+     */
     private List<Point> resample(final List<Point> points, final int n) {
         final List<Point> newPoints = new ArrayList<>();
         assert points.size() > 0;
@@ -134,11 +123,9 @@ public class Gesture {
         return newPoints;
     }
 
-    /// <summary>
-    /// Computes the path size() for an array of points
-    /// </summary>
-    /// <param name="points"></param>
-    /// <returns></returns>
+    /**
+     * Computes the path size() for an array of points
+     */
     private double pathSize(final List<Point> points) {
         double size = 0;
         for (int i = 1; i < points.size(); i++) {
