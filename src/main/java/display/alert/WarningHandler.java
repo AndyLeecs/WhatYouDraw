@@ -14,6 +14,9 @@ public class WarningHandler {
         this.warnable = warnable;
     }
 
+    /**
+     * @return true for not cancelled
+     */
     public boolean showConfirmationDialog(final String str) {
         final Alert suggestion = getAlert(str);
         final ButtonType yes = new ButtonType(WarningConfig.YES);
