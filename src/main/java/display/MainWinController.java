@@ -10,7 +10,7 @@ import display.alert.ErrorHandler;
 import display.alert.IWarnable;
 import display.alert.WarningHandler;
 import display.canvas.CustomCanvas;
-import display.canvas.IUndoNotifiable;
+import display.canvas.INotifiable;
 import exception.ProjectDataException;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -25,7 +25,7 @@ import javafx.stage.Window;
 /**
  * distribute MainWin events
  */
-public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifiable {
+public class MainWinController implements IPrjManagable, IWarnable, INotifiable {
     @FXML
     private AnchorPane root;
     @FXML
@@ -34,6 +34,10 @@ public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifia
     private Button undo;
     @FXML
     private Button redo;
+    @FXML
+    private Button newfile;
+
+    private boolean modified;
 
     @Override
     public CustomCanvas getCanvas() {
@@ -44,8 +48,8 @@ public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifia
     public void initialize() {
         root.setBackground(new Background(new BackgroundFill(ColorConfig.BACKGROUND_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
         canvas.setDraw();
-        canvas.setUndoNotifiable(this);
-        disableUndoAndRedo();
+        canvas.setNotifiable(this);
+        onNewFileFired();
     }
 
     @FXML
@@ -56,7 +60,7 @@ public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifia
     @FXML
     public void recognizeOnAction() {
         canvas.setRecognize();
-        disableUndoAndRedo();
+        onNewFileFired();
     }
 
     @FXML
@@ -65,23 +69,30 @@ public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifia
             final PrjVoTrans prjVoTrans = new PrjVoTrans(this);
             prjVoTrans.clearVo();
 
-            disableUndoAndRedo();
+            onNewFileFired();
         }
     }
 
+    /**
+     * @return true for not modified or not cancelled
+     * if not modified before, the warning will not be shown
+     */
     private boolean warnOnNew() {
-        return new WarningHandler(this).showConfirmationDialog(WarningConfig.SAVE_FIRST);
+        return !modified || new WarningHandler(this).showConfirmationDialog(WarningConfig.SAVE_FIRST);
     }
 
     @FXML
     public void openOnAction() {
-        try {
-            final Prj prj = poToPrj();
-            prjToVo(prj);
-            disableUndoAndRedo();
-            canvas.setDraw();
-        } catch (ProjectDataException e) {
-            new ErrorHandler().showErrorDialog(e);
+        if (warnOnNew()) {
+            try {
+                final Prj prj = poToPrj();
+                prjToVo(prj);
+                if(prj != null)
+                    onNewFileFired();
+                canvas.setDraw();
+            } catch (ProjectDataException e) {
+                new ErrorHandler().showErrorDialog(e);
+            }
         }
     }
 
@@ -159,15 +170,20 @@ public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifia
         return root.getScene().getWindow();
     }
 
-    private void disableUndoAndRedo() {
+    private void onNewFileFired() {
         undo.setDisable(true);
         redo.setDisable(true);
-    }
 
+        modified = false;
+        newfile.setDisable(true);
+    }
 
     @Override
     public void enableUndo() {
         undo.setDisable(false);
+
+        modified = true;
+        newfile.setDisable(false);
     }
 
 }
