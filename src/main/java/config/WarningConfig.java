@@ -9,6 +9,7 @@ public class WarningConfig {
      */
     public static final String YES = "yes";
     public static final String NO = "no";
+    public static final String CANCEL = "cancel";
 
     public static final String SAVE_FIRST = "Save your project first?";
 }

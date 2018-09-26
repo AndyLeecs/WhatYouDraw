@@ -14,15 +14,19 @@ public class WarningHandler {
         this.warnable = warnable;
     }
 
-    public void showConfirmationDialog(final String str) {
+    public boolean showConfirmationDialog(final String str) {
         final Alert suggestion = getAlert(str);
         final ButtonType yes = new ButtonType(WarningConfig.YES);
         final ButtonType no = new ButtonType(WarningConfig.NO);
-        suggestion.getButtonTypes().setAll(yes, no);
+        final ButtonType cancel = new ButtonType(WarningConfig.CANCEL);
+        suggestion.getButtonTypes().setAll(yes, no, cancel);
         final Optional<ButtonType> result = suggestion.showAndWait();
-        if (result.isPresent() && result.get() == yes) {
-            confirmationContinue();
-        }
+        assert result.isPresent();
+            if (result.get() == yes) {
+                confirmationContinue();
+            }
+
+        return !(result.get() == cancel);
     }
 
     private Alert getAlert(final String str) {

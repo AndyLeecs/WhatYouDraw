@@ -27,7 +27,9 @@ public class MainWin extends Stage {
         this.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(final WindowEvent event) {
-                new WarningHandler(loader.getController()).showConfirmationDialog(WarningConfig.SAVE_FIRST);
+                boolean close = new WarningHandler(loader.getController()).showConfirmationDialog(WarningConfig.SAVE_FIRST);
+                if (!close)
+                    event.consume();
             }
         });
     }

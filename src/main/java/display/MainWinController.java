@@ -61,16 +61,16 @@ public class MainWinController implements IPrjManagable, IWarnable, IUndoNotifia
 
     @FXML
     public void newOnAction() {
-        warnOnNew();
+        if (warnOnNew()) {
+            final PrjVoTrans prjVoTrans = new PrjVoTrans(this);
+            prjVoTrans.clearVo();
 
-        final PrjVoTrans prjVoTrans = new PrjVoTrans(this);
-        prjVoTrans.clearVo();
-
-        disableUndoAndRedo();
+            disableUndoAndRedo();
+        }
     }
 
-    private void warnOnNew() {
-        new WarningHandler(this).showConfirmationDialog(WarningConfig.SAVE_FIRST);
+    private boolean warnOnNew() {
+        return new WarningHandler(this).showConfirmationDialog(WarningConfig.SAVE_FIRST);
     }
 
     @FXML
